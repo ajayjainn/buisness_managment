@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+<title>Home</title>
+{%endblock%}
+
+{%block content%}
+
+<div class='container'>
+{%for customer in customers%}
+<div class="card my-4 rounded-3 border border-dark">
+    <div class="card-body">
+      <h5 class="card-title">{{customer.name}}</h5>
+      <p class="card-text">Amount Pending <span class='fw-bold text-success'>₹{{customer.amountPending}}</span></p>
+      <a href="/accounts/{{customer.id}}" class="btn btn-primary">View Account</a>
+    </div>
+</div> 
+{%endfor%}  
+
+</div>
+
+{%endblock%}
