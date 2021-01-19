@@ -10,7 +10,7 @@ class Customer(models.Model):
         return self.name
 
 class Transaction(models.Model):
-    customer = models.ForeignKey(Customer, related_name='transaction', on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, related_name='transactions', on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     tea = models.DecimalField(default=0, decimal_places=1, max_digits=3)
     amount = models.IntegerField(default=0)

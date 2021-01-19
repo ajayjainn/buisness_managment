@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Account</title>
+{%endblock%}
+
+{%block content%}
+
+<!--HEADING-STARTS-->
+<div class="container text-center my-4">
+    <u><p class="fs-1 h2">{{customer.name}}</p></u>
+    <em><p class="fs-4 mt-4 mb-0">Amount Pending <span class='fs-4 text-success'>₹{{customer.amountPending}}</span></p></em>
+    {%if customer.phoneNo%}
+    <em><p class="fs-4 mt-1">PhoneNo. <u><span class='fs-4 text-secondary'>{{customer.phoneNo}}</span></p></em></u>
+    {%endif%}
+</div>
+<!--HEADING-ENDS-->
+
+
+<!--FORM-STARTS-->
+<div class='container '>
+<form method="POST" action='/account/{{customer.id}}/update' class='rounded-3 border border-dark p-4'>
+    {%csrf_token%}
+    <!--TeaQuantity-->
+    <div class="mb-3">
+        <div class="form-floating">
+            <input name='tea' class="form-control" id="floatingInputValue" placeholder=" ">
+            <label for="floatingInputValue">Quantity of Tea</label>
+          </div>
+    </div>
+
+    <!--AmountGiven-->
+    <div class="mb-3">
+        <div class="form-floating">
+            <input name='amount' type="number" class="form-control" id="floatingInputValue" placeholder=" ">
+            <label for="floatingInputValue">Amount</label>
+        </div>
+    </div>  
+
+    <div class="mb-3">
+        <div class="form-floating">
+            <textarea name='remarks' style="height:72px;" class="form-control" placeholder=" " id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Comments</label>
+        </div>
+    </div> 
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+<!--FORM-ENDS-->
+
+
+
+
+
+<!--TRANSACTIONS-START-->
+<div class="container">
+
+    {%if customer.transactions.all%}
+
+    {%for transaction in customer.transactions.all reversed%}
+
+    <div class="card my-4 rounded-3 border border-dark" >
+
+        <div class="card-header">
+            <strong>{{transaction.date}}</strong>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            {%if transaction.tea%}
+            <li class="list-group-item d-flex justify-content-between">Quantity of Tea<span>{{transaction.tea}} Kg</span></li>
+            {%else%}
+            <li class="list-group-item"><del>Quantity of Tea</del></li>
+            {%endif%}
+            
+            {%if transaction.amount%}
+            <li class="list-group-item d-flex justify-content-between">Amount Given<span>₹{{transaction.amount}}</span></li>
+            {%else%}
+            <li class="list-group-item"><del>Amount Given</del></li>
+            {%endif%}
+
+            {%if transaction.remarks%}
+            <li class="list-group-item d-flex justify-content-between">Remarks<span>{{transaction.remarks}}</span></li>
+            {%endif%}
+
+            <li class="list-group-item d-flex justify-content-between bg-dark text-white">Closing Balance<span>₹{{transaction.closingBalance}}</span></li>
+
+        </ul>
+
+    </div>
+
+    {%endfor%}
+
+    {%else%}
+    <h3 class='mt-3 text-center'>No Transactions</h3>
+    {%endif%}
+
+
+</div>
+<!--TRANSACTIONS-END-->
+
+
+
+
+{%endblock%}

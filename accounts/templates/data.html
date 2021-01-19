@@ -1,0 +1,92 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Data</title>
+{%endblock%}
+
+{%block content%}
+<div class='container my-5'>
+
+  <div class="card mb-3 rounded-3 border border-dark">
+    <div class="card-body">
+      <h5 class="card-title">Today</h5>
+      <p class="card-text">
+        <div class="card">
+            <ul class="text-dark list-group list-group-flush">
+   
+              <li class="list-group-item d-flex justify-content-between">
+                Total Collection
+                <span>₹
+                  {%if data1.collection%}{{data1.collection}}
+                  {%else%}0
+                  {%endif%}
+                </span>
+              </li>
+              
+              <li class="list-group-item d-flex justify-content-between">
+                Tea Sold
+                <span>
+                  {%if data1.tea_sold%}{{data1.tea_sold}}
+                  {%else%}0
+                  {%endif%}Kg</span>
+              </li>
+  
+            </ul>
+          </div>
+      </p>
+  </div>
+  </div>
+
+
+<div class="card mb-3 rounded-3 border border-dark">
+        <div class="card-body">
+          <h5 class="card-title">Last 30 days</h5>
+          <p class="card-text">
+            <div class="card">
+
+                <ul class="text-dark list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between">
+                    Total Collection
+                    <span>₹
+                      {%if data30.collection%}{{data30.collection}}
+                      {%else%}0
+                      {%endif%}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    Tea Sold
+                    <span>
+                      {%if data30.tea_sold%}{{data30.tea_sold}}
+                      {%else%}0
+                      {%endif%}Kg</span>
+                  </li>
+                </ul>
+
+              </div>
+          </p>
+    </div>
+</div>
+
+
+<div class="card rounded-3 border border-dark">
+  
+    <div class="card-body">
+      <h5 class="card-title mx-2">Top Debtors</h5>
+      <h6 class="card-subtitle mb-2 mt-1 text-muted mx-2">Total Credit: ₹{{totalcredit}}</h6>
+      <p class="card-text">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                {%for debtor in debtors%}
+                <li class="list-group-item d-flex justify-content-between">
+                    <a href="/account/{{debtor.id}}">{{debtor.name}}</a>
+                    <span>₹{{debtor.amountPending}}</span>
+                </li>
+                {%endfor%}
+
+            </ul>
+          </div>
+      </p>
+    </div>
+</div>
+
+</div>
+{%endblock%}

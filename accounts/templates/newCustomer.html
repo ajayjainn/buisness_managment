@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>New Customer</title>
+{%endblock%}
+
+{%block content%}
+<div class='container mt-5'>
+
+<form method='POST' action="{%url 'saveCustomer'%}">
+    {%csrf_token%}
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input class="form-control" id="name" name='name'>
+    </div>
+    <div class="mb-3">
+      <label for="number" class="form-label">Phone Number</label>
+      <input class="form-control" id="number" name='number'>
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount Pending</label>
+        <input class="form-control" id="amount" name='amount'>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+
+
+{%endblock%}

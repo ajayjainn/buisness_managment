@@ -8,15 +8,19 @@
 {%block content%}
 
 <div class='container'>
+{%if not customers%}
+<p class='text-center fs-2 my-3'>No Customers</p>
+{%else%}
 {%for customer in customers%}
 <div class="card my-4 rounded-3 border border-dark">
     <div class="card-body">
       <h5 class="card-title">{{customer.name}}</h5>
       <p class="card-text">Amount Pending <span class='fw-bold text-success'>₹{{customer.amountPending}}</span></p>
-      <a href="/accounts/{{customer.id}}" class="btn btn-primary">View Account</a>
+      <a href="/account/{{customer.id}}" class="btn btn-primary bg-dark">View Account</a>
     </div>
 </div> 
 {%endfor%}  
+{%endif%}
 
 </div>
 
